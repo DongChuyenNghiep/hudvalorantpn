@@ -1,11 +1,20 @@
-{
-  "serverEndpoint": "http://localhost:5200",
-  "sponsorImageUrls": ["/assets/misc/logo.webp"],
-  "sponsorImageRotateSpeed": 5000,
-  "attackerColorPrimary": "#b82e3c",
-  "attackerColorSecondary": "#ff4557",
-  "attackerColorShieldCurrency": "#ff838f",
-  "defenderColorPrimary": "#25ac79",
-  "defenderColorSecondary": "#61eab6",
-  "defenderColorShieldCurrency": "#61eab6"
-}
+---
+services:
+  server:
+    build:
+    image: "ghcr.io/valospectra/server:latest"
+    ports:
+      - "5100:5100"
+      - "5101:5101"
+      - "5200:5200"
+    environment:
+      INSECURE: true
+      REQUIRE_KEY_ATUH: false
+    volumes:
+      - ./keys:/app/keys
+  frontend:
+    image: "ghcr.io/valospectra/overlay:latest"
+    ports:
+      - "3000:80"
+    volumes:
+      - ./config:/usr/share/nginx/html/assets/config/
