@@ -1,19 +1,19 @@
-# Sử dụng Node.js phiên bản mới nhất
+# Sử dụng Node.js phiên bản 18
 FROM node:18
 
-# Thiết lập thư mục làm việc trong container
+# Thiết lập thư mục làm việc
 WORKDIR /app
 
-# Sao chép package.json và package-lock.json
+# Copy file package.json và package-lock.json (nếu có)
 COPY package*.json ./
 
 # Cài đặt dependencies
 RUN npm install
 
-# Sao chép toàn bộ mã nguồn vào container
+# Copy toàn bộ mã nguồn
 COPY . .
 
-# Expose cổng mà ứng dụng chạy
+# Mở cổng 3000
 EXPOSE 3000
 
 # Chạy ứng dụng
